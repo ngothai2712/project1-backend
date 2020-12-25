@@ -8,7 +8,7 @@ data_dir/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
+assets/uploads
 
 # Editor directories and files
 .idea
@@ -17,3 +17,9 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+# local env files
+.env
+.env.local
+.env.production
+.env.*.local
