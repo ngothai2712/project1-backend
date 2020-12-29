@@ -27,9 +27,9 @@
 // module.exports = router
 import express from 'express'
 
-import { getDetail, getList, newUser, update } from './userController'
+import { getDetail, getList, newUser, update, deleteUser } from './userController'
 import { createValidator, updateValidator } from './userValidator'
-import { authenticate } from '../../middleware/auth'
+import { authenticate, checkIsAdmin } from '../../middleware/auth'
 
 export default (app) => {
     const router = express.Router()
@@ -45,9 +45,7 @@ export default (app) => {
     //     'update_user',
     // ]), updatePasswordValidator, updatePassword);
     //
-    // router.delete('/:id', authenticate, checkPermission([
-    //     'delete_user',
-    // ]), deleteUser);
+    router.delete('/:id', authenticate, checkIsAdmin, deleteUser)
 
     app.use('/api/v1/user', router)
 }

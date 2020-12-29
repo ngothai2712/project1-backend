@@ -6,7 +6,7 @@ import Joi from '@hapi/joi'
 const createValid = Joi.object().keys({
     name: Joi.string().max(255).required(),
     email: Joi.string().max(255).email().required(),
-    phone: Joi.string().max(20).allow(null),
+    // phone: Joi.string().max(20).allow(null),
     // role: Joi.string().valid('admin', 'supervisor', 'school_manager', 'teacher', 'business_unit_leader', 'academic_affairs').allow(null),
 })
 

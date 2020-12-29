@@ -33,3 +33,18 @@ export async function authenticate(req, res, next) {
         )
     }
 }
+
+export async function checkIsAdmin(req, res, next) {
+    try {
+        if (req.loginUser?.role === 'admin') {
+            return next()
+        }
+        return res.json(
+            respondWithError(ErrorCodes.ERROR_CODE_UNAUTHORIZED, 'Is not ADMIN'),
+        )
+    } catch (e) {
+        return res.json(
+            respondWithError(ErrorCodes.ERROR_CODE_UNAUTHORIZED, 'Is not ADMIN'),
+        )
+    }
+}

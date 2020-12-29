@@ -48,7 +48,7 @@ export async function update(req, res) {
             return res.json(
                 respondWithError(
                     ErrorCodes.ERROR_CODE_ITEM_NOT_EXIST,
-                    'user.emailIsAlready',
+                    'Email address is already exists',
                     {},
                 ),
             )
@@ -60,6 +60,21 @@ export async function update(req, res) {
         return res.json(respondSuccess({ items: rawData, totalItems: 1 }))
     } catch (error) {
         return logSystemError(res, error, 'userController - update')
+    }
+}
+// delete user
+export async function deleteUser(req, res) {
+    try {
+        const { id } = req.params
+        const isUserExist = await User.findOne({
+            _id: { $ne: id },
+        })
+        if (isUserExist) {
+            const rawData = await User.deleteOne({ _id: id })
+            return res.json(respondSuccess({ items: rawData, totalItems: 1 }))
+        }
+    } catch (error) {
+        return logSystemError(res, error, 'userController - delete')
     }
 }
 

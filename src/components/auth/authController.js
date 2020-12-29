@@ -12,7 +12,7 @@ export const signUp = async (req, res) => {
         return res.json(
             respondWithError(
                 ErrorCodes.ERROR_CODE_ITEM_EXIST,
-                'auth.signUp.emailExisted',
+                'Email address is already exists',
                 {},
             ),
         )
@@ -27,7 +27,11 @@ export const signIn = async (req, res) => {
     const user = await User.findOne({ email: email })
     if (!user) {
         return res.json(
-            respondWithError(ErrorCodes.ERROR_CODE_ITEM_EXIST, 'user.emailNotExist', {}),
+            respondWithError(
+                ErrorCodes.ERROR_CODE_ITEM_EXIST,
+                'Email address does not exist',
+                {},
+            ),
         )
     }
 
@@ -50,11 +54,7 @@ export const signIn = async (req, res) => {
         return res.json(respondSuccess(userRes))
     }
     return res.json(
-        respondWithError(
-            ErrorCodes.ERROR_CODE_ITEM_EXIST,
-            'auth.signIn.wrongEmailOrPassword',
-            {},
-        ),
+        respondWithError(ErrorCodes.ERROR_CODE_ITEM_EXIST, 'Password incorrect ', {}),
     )
 }
 
